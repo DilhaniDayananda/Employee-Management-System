@@ -1,0 +1,12 @@
+.loginPage{
+    background: url('D:\Projects\React-Node\Employee MS\public\Images\young-happy-woman-having-job-interview-office.jpg');
+    background: linear-gradient();
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size: 100% 120%;
+}
+
+.loginForm{
+    background-color: rgba(1, 32, 93, 0.6);
+    color: white;
+}
