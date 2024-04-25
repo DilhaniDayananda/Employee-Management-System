@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Profile() {
+
+function EditEmployee() {
   const { id } = useParams();
   const [employee, setEmployee] = useState({
     name: "",
@@ -51,21 +52,21 @@ function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:3000/auth/employee/" + id, employee)
-      .then((result) => {
+    .put("http://localhost:3000/auth/employee/"+id,employee)
+    .then((result)=>{
         if (result.data.Status) {
-          navigate("/dashboard/employee/");
-        } else {
-          alert(result.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
+            navigate(( "/dashboard/employee/"));
+          } else {
+            alert(result.data.Error);
+          }
+    })
+    .catch((err)=>console.log(err));
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">My Profile</h3>
+        <h3 className="text-center">Edit Employee</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
             <label for="inputName" className="form-label">
@@ -75,6 +76,8 @@ function Profile() {
               type="text"
               className="form-control rounded-0"
               id="inputName"
+              placeholder="Enter Name"
+              value={employee.name}
               onChange={(e) =>
                 setEmployee({ ...employee, name: e.target.value })
               }
@@ -88,25 +91,15 @@ function Profile() {
               type="email"
               className="form-control rounded-0"
               id="inputEmail"
+              placeholder="Enter Email"
               autoComplete="off"
+              value={employee.email}
               onChange={(e) =>
                 setEmployee({ ...employee, email: e.target.value })
               }
             ></input>
           </div>
-          <div className="col-12">
-            <label for="inputPassword" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control rounded-0"
-              id="inputmEailPassword"
-              onChange={(e) =>
-                setEmployee({ ...employee, password: e.target.value })
-              }
-            ></input>
-          </div>
+
           <div className="col-12">
             <label for="inputSalary" className="form-label">
               Salary
@@ -115,7 +108,9 @@ function Profile() {
               type="text"
               className="form-control rounded-0"
               id="inputsalary"
+              placeholder="Enter Salary"
               autoComplete="off"
+              value={employee.salary}
               onChange={(e) =>
                 setEmployee({ ...employee, salary: e.target.value })
               }
@@ -129,7 +124,9 @@ function Profile() {
               type="text"
               className="form-control rounded-0"
               id="inputAddress"
+              placeholder="1234 main St"
               autoComplete="off"
+              value={employee.address}
               onChange={(e) =>
                 setEmployee({ ...employee, address: e.target.value })
               }
@@ -143,6 +140,7 @@ function Profile() {
               name="category"
               id="category"
               className="form-select"
+              value={employee.category}
               onChange={(e) =>
                 setEmployee({ ...employee, category: e.target.value })
               }
@@ -152,23 +150,9 @@ function Profile() {
               })}
             </select>
           </div>
-          <div className="col-12 mb-3">
-            <label for="inputGroupFilw01" className="form-label">
-              Profile Photo
-            </label>
-            <input
-              type="file"
-              className="form-control rounded-0"
-              id="inputGroupFile"
-              name="image"
-              onChange={(e) =>
-                setEmployee({ ...employee, image: e.target.files[0] })
-              }
-            ></input>
-          </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100 ">
-              Update Profile
+              Update Employee
             </button>
           </div>
         </form>
@@ -177,4 +161,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default EditEmployee;

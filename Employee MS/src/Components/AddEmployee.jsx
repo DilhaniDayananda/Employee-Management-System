@@ -3,6 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function AddEmployee() {
+  const [employee, setEmployee] = useState({
+    name: "",
+    email: "",
+    password: "",
+    salary: "",
+    address: "",
+    category: "",
+    image: "",
+  });
+
   const [category, setCategory] = useState([]);
   useEffect(() => {
     axios
@@ -17,16 +27,7 @@ function AddEmployee() {
       .catch((err) => console.log(err));
   });
 
-  const [employee, setEmployee] = useState({
-    name: "",
-    email: "",
-    password: "",
-    salary: "",
-    address: "",
-    category: "",
-    image: "",
-  });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -41,7 +42,7 @@ function AddEmployee() {
       .post("http://localhost:3000/auth/add_employee", formData)
       .then((result) => {
         if (result.data.Status) {
-          console.log("res",result.data)
+          console.log("res", result.data);
           navigate("/dashboard/employee/");
         } else {
           alert(result.data.Error);
